@@ -1,6 +1,7 @@
 # Roadmap
 
-`pi-servocam-local` is planned in small phases so the project stays understandable while hardware and software are brought up.
+`pi-servocam-local` is planned in small phases so the project stays
+understandable while hardware and software are brought up.
 
 ## P0 - Documentation
 
@@ -45,4 +46,5 @@ Goal: turn the prototype into a pleasant local LAN device.
 
 ## Guiding Rule
 
-Do not pretend a feature exists before it has been tested. Documentation should say what is planned, what is known, and what still needs proof.
+Do not pretend a feature exists before it has been tested. Documentation
+should say what is planned, what is known, and what still needs proof.
