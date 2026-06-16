@@ -2,17 +2,18 @@
 
 ![status: planning](https://img.shields.io/badge/status-planning-blue)
 ![hardware: Raspberry Pi 5](https://img.shields.io/badge/hardware-Raspberry%20Pi%205-c51a4a)
-![camera: Module 2/3](https://img.shields.io/badge/camera-Module%202%2F3-2f7d32)
+![camera: Module 3](https://img.shields.io/badge/camera-Module%203-2f7d32)
 ![network: local LAN](https://img.shields.io/badge/network-local%20LAN-455a64)
 
 `pi-servocam-local` is a documentation-first Raspberry Pi camera project:
-a local LAN camera built around a Raspberry Pi 5, Raspberry Pi Camera
-Module 2 or 3, and a two-servo pan/tilt mount.
+a local LAN camera built around a Raspberry Pi 5 and Raspberry Pi Camera
+Module 3.
 
 The goal is a small, understandable, self-hosted device that can be
 opened from a phone or browser on the same network. No cloud service, no
 public internet dependency, and no promise of production-ready camera
-control yet.
+control yet. Pan/tilt movement is planned later, after the camera path is
+understood.
 
 ## Quick Links
 
@@ -25,39 +26,48 @@ control yet.
 ```mermaid
 flowchart LR
     User["User browser / phone"]
-    UI["Local web UI"]
+    UI["Local camera view"]
     Service["Raspberry Pi service"]
-    Stream["Camera stream"]
-    ServoController["Servo controller"]
-    Pan["Pan servo"]
-    Tilt["Tilt servo"]
-    Mount["Camera mount"]
+    Camera["Camera Module 3"]
+    Stream["Local camera stream"]
+    FutureServos["Future pan/tilt servos"]
+    FutureMount["Future pan/tilt mount"]
 
     User --> UI
     UI --> Service
-    Service --> Stream
-    Service --> ServoController
-    ServoController --> Pan
-    ServoController --> Tilt
-    Pan --> Mount
-    Tilt --> Mount
+    Service --> Camera
+    Camera --> Stream
+    FutureServos -. later .-> FutureMount
 ```
 
-## Hardware Target
+## Current Hardware
 
-Initial hardware target:
+Currently available hardware:
 
 - Raspberry Pi 5
-- Raspberry Pi Camera Module 2 or Raspberry Pi Camera Module 3
-- Two servos for pan/tilt movement
-- Standard wall power supply for the first stage
-- Local network access only
+- Raspberry Pi Camera Module 3
 
 Planned later:
 
-- Confirmed mounting design
-- Optional enclosure
+- Two servos for pan/tilt movement
+- Pan/tilt mount
+- Separate servo power supply if needed
 - Optional battery or power pack
+
+## Current Implementation Target
+
+The next project stage is Camera Module 3 bring-up.
+
+The first useful prototype should:
+
+- Confirm that Camera Module 3 works on the Raspberry Pi 5.
+- Document only tested camera setup steps after they are verified on the
+  device.
+- Prepare for a local LAN camera view later.
+
+Servo control is future work. There should be no servo UI, pan/tilt
+sliders, or movement controls until servos and mounting hardware are
+selected and tested.
 
 ## Current Status
 
@@ -79,12 +89,13 @@ understandable before adding moving parts.
 
 The planned system is intentionally small:
 
-- A Raspberry Pi 5 runs a local service.
-- A browser-based UI is available only on the local network.
-- The service will eventually expose a camera stream.
-- The same service will eventually control pan and tilt servos.
-- Servo limits and calibration will be added before any polished control
-  experience.
+- A Raspberry Pi 5 will run a local service.
+- A browser-based UI will be available only on the local network.
+- The first implementation target is Camera Module 3 bring-up.
+- A local LAN camera view will come after camera bring-up.
+- Servo control will come later, after hardware selection.
+- Servo limits and calibration will be added before any polished movement
+  controls.
 
 The project should stay readable, local-first, and hardware-conscious as
 it grows.
@@ -94,7 +105,8 @@ it grows.
 The intended access model is:
 
 - Device runs on a home or lab LAN.
-- User opens the local web UI from a phone, tablet, or desktop browser.
+- User opens the local camera view from a phone, tablet, or desktop
+  browser.
 - No cloud account is required.
 - No public internet exposure is assumed.
 - Remote access, tunneling, and WAN deployment are out of scope for the
@@ -116,14 +128,11 @@ The intended access model is:
 ## Roadmap
 
 - [x] repo documentation
-- [ ] hardware wiring plan
-- [ ] camera bring-up
-- [ ] local web UI
-- [ ] pan/tilt servo control
-- [ ] limits/calibration
-- [ ] systemd service
-- [ ] optional enclosure
-- [ ] optional battery/power pack
+- [ ] Camera Module 3 bring-up
+- [ ] local LAN camera view
+- [ ] pan/tilt hardware selection
+- [ ] servo control and calibration
+- [ ] optional enclosure/battery
 
 See the full [roadmap](docs/ROADMAP.md) for phase-level planning.
 
@@ -144,6 +153,6 @@ This project starts with the README on purpose. Hardware projects are
 easier to build, debug, and share when the goal, constraints, and system
 map are visible early.
 
-The next step is not to add a large framework. The next step is to
-confirm the hardware path, then bring up the camera and servos in small,
-testable increments.
+The next step is not to add a large framework. The next step is to bring
+up Camera Module 3 on the Raspberry Pi 5, then document what actually
+works on the device.

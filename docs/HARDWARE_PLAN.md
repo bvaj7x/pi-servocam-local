@@ -1,28 +1,24 @@
 # Hardware Plan
 
-This document captures the initial hardware direction for
-`pi-servocam-local`. It is intentionally conservative until parts,
-wiring, and power behavior are confirmed.
+This document captures the current hardware state and the planned
+hardware direction for `pi-servocam-local`. It is intentionally
+conservative until parts, wiring, and power behavior are confirmed.
 
-## Initial Hardware List
+## Current Hardware
 
 - Raspberry Pi 5
-- Raspberry Pi Camera Module 2 or Raspberry Pi Camera Module 3
-- Two servos for pan/tilt movement
-- Standard wall power supply for the Raspberry Pi
-- Local network connection through Ethernet or Wi-Fi
+- Raspberry Pi Camera Module 3
 
 ## Already Selected
 
 - Main computer: Raspberry Pi 5
-- Camera family: Raspberry Pi Camera Module 2 or 3
-- Movement concept: two-axis pan/tilt using two servos
-- Network model: local LAN only
+- Current camera target: Raspberry Pi Camera Module 3
+- Current implementation target: Camera Module 3 bring-up
+- Network model: local LAN only, once the camera view exists
 - First-stage power model: wall power, no battery
 
 ## Still To Choose
 
-- Exact camera module version
 - Exact servo models
 - Servo power supply rating
 - Pan/tilt bracket or mount
@@ -30,10 +26,19 @@ wiring, and power behavior are confirmed.
 - Case or enclosure, if needed
 - Optional battery or power pack for a later stage
 
+## Planned Later
+
+- Two servos for pan/tilt movement
+- Pan/tilt mount
+- Separate servo power supply if needed
+- Optional battery or power pack
+
 ## Power Notes
 
-Do not power powerful servos directly from the Raspberry Pi 5V pin as a
-default design.
+There are no servos in the current hardware set.
+
+When servos are added later, do not power powerful servos directly from
+the Raspberry Pi 5V pin as a default design.
 
 Servos can draw high current during startup, movement, or stall
 conditions. For anything beyond very small test servos, a separate servo
@@ -47,15 +52,18 @@ treated as build-ready.
 
 No confirmed pinout is documented yet.
 
-That is deliberate: exact GPIO pins, power wiring, and camera cable
+That is deliberate: exact GPIO pins, servo power wiring, and camera cable
 routing should be written down after the selected servos, controller
 approach, and mechanical layout are known.
 
+Camera Module 3 bring-up should be documented first, after it is tested
+on the Raspberry Pi 5.
+
 ## Mechanical Notes
 
-The first version can use a simple pan/tilt bracket or prototype mount.
-A polished enclosure is not required for early bring-up, but the project
-should leave space for:
+The first version does not need a pan/tilt bracket or polished enclosure.
+
+When pan/tilt hardware is added later, the project should leave space for:
 
 - Servo travel limits
 - Camera cable strain relief

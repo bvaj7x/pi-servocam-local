@@ -12,36 +12,50 @@ Goal: make the project legible before implementation.
 - [ ] confirm initial hardware choices
 - [ ] document local-only network assumptions
 
-## P1 - Camera Stream
+## P1 - Camera Module 3 Bring-Up
 
-Goal: bring up the camera path on Raspberry Pi 5.
+Goal: prove the current camera hardware on Raspberry Pi 5.
 
-- [ ] camera bring-up
-- [ ] confirm Raspberry Pi Camera Module 2 or 3 setup
-- [ ] choose the first streaming approach
-- [ ] document tested camera commands after they exist
-- [ ] expose a basic local view when implementation starts
+- [ ] connect Raspberry Pi Camera Module 3
+- [ ] confirm Camera Module 3 detection on Raspberry Pi 5
+- [ ] document tested camera setup steps after they exist
+- [ ] keep untested commands out of the documentation
 
-## P2 - Servo Pan/Tilt
+## P2 - Local LAN Camera View
+
+Goal: expose the camera locally after bring-up is confirmed.
+
+- [ ] choose the first local camera view approach
+- [ ] expose a basic camera view on the local network
+- [ ] document tested local access steps after they exist
+- [ ] keep the prototype local-only by default
+
+## P3 - Pan/Tilt Hardware Selection
+
+Goal: choose the movement hardware after the camera path is understood.
+
+- [ ] choose servo models
+- [ ] choose a pan/tilt mount
+- [ ] decide whether separate servo power is needed
+- [ ] document confirmed wiring only after hardware is selected
+
+## P4 - Servo Control And Calibration
 
 Goal: add controlled two-axis movement safely.
 
 - [ ] pan/tilt servo control
-- [ ] choose servo models and power supply
 - [ ] document confirmed wiring
 - [ ] add movement limits
 - [ ] add calibration
 - [ ] verify mechanical range before polish
 
-## P3 - Polished Local Device
+## P5 - Optional Enclosure/Battery
 
-Goal: turn the prototype into a pleasant local LAN device.
+Goal: make the device more self-contained after the core prototype works.
 
-- [ ] local web UI
-- [ ] systemd service
-- [ ] simple device setup notes
 - [ ] optional enclosure
 - [ ] optional battery/power pack
+- [ ] simple device setup notes
 - [ ] final safety and maintenance notes
 
 ## Guiding Rule

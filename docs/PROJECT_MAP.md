@@ -1,10 +1,16 @@
 # Project Map
 
-`pi-servocam-local` is planned as a small local-network camera device
-with two main capabilities:
+`pi-servocam-local` is planned as a small local-network camera device.
+The current hardware focus is Camera Module 3 bring-up on Raspberry Pi 5.
 
-- Show a camera stream from a Raspberry Pi Camera Module 2 or 3.
-- Move the camera mount using separate pan and tilt servos.
+Current target:
+
+- Bring up Raspberry Pi Camera Module 3.
+- Prepare for a local LAN camera view later.
+
+Future target:
+
+- Add pan/tilt movement after servos and mounting hardware are selected.
 
 The project is currently in a documentation-first planning stage. The
 diagram below describes the intended direction, not completed behavior.
@@ -14,22 +20,24 @@ diagram below describes the intended direction, not completed behavior.
 ```mermaid
 flowchart LR
     User["User browser / phone"]
-    UI["Local web UI"]
+    UI["Local camera view"]
     Service["Raspberry Pi service"]
-    Stream["Camera stream"]
-    ServoController["Servo controller"]
-    Pan["Pan servo"]
-    Tilt["Tilt servo"]
-    Mount["Camera mount"]
+    Camera["Camera Module 3"]
+    Stream["Local camera stream"]
+    ServoController["Future servo controller"]
+    Pan["Future pan servo"]
+    Tilt["Future tilt servo"]
+    Mount["Future pan/tilt mount"]
 
     User --> UI
     UI --> Service
-    Service --> Stream
-    Service --> ServoController
-    ServoController --> Pan
-    ServoController --> Tilt
-    Pan --> Mount
-    Tilt --> Mount
+    Service --> Camera
+    Camera --> Stream
+    Service -. future .-> ServoController
+    ServoController -. future .-> Pan
+    ServoController -. future .-> Tilt
+    Pan -. future .-> Mount
+    Tilt -. future .-> Mount
 ```
 
 ## Components
@@ -40,35 +48,34 @@ The user interface is intended to run in a normal browser on a phone,
 tablet, or desktop connected to the same local network as the Raspberry
 Pi.
 
-### Local Web UI
+### Local Camera View
 
-The local web UI will eventually show the camera view and provide simple
-pan/tilt controls. It should be practical rather than decorative: quick
-to load, clear on small screens, and usable on a LAN without cloud
-services.
+The local camera view will eventually show Camera Module 3 output on the
+LAN. It should be practical rather than decorative: quick to load, clear
+on small screens, and usable without cloud services.
 
 ### Raspberry Pi Service
 
 The Raspberry Pi service is the planned local process that will
-coordinate the camera stream and servo commands. No backend has been
-implemented yet.
+coordinate the camera path first. No backend has been implemented yet.
 
 ### Camera Stream
 
-The camera stream will come from Raspberry Pi Camera Module 2 or Camera
-Module 3. Camera bring-up is a future milestone, not a current
-repository feature.
+The camera path will use Raspberry Pi Camera Module 3. Camera bring-up is
+the next implementation target, not a current repository feature.
 
 ### Servo Controller
 
-The servo controller will eventually translate UI intent into safe
-pan/tilt movement. Limits and calibration belong here before polished
-movement controls are considered complete.
+The servo controller is future work. It will eventually translate UI
+intent into safe pan/tilt movement after servo hardware is selected.
+Limits and calibration belong here before polished movement controls are
+considered complete.
 
 ### Pan Servo / Tilt Servo
 
-The two servos provide horizontal and vertical movement. Exact servo
-model, power approach, and mounting geometry still need to be confirmed.
+The planned servos will provide horizontal and vertical movement. Exact
+servo model, power approach, and mounting geometry still need to be
+confirmed.
 
 ### Camera Mount
 
@@ -81,4 +88,5 @@ future work.
 - Local-first and LAN-only by default
 - Small enough to understand without heavy architecture
 - Hardware notes documented before wiring is treated as final
-- Incremental bring-up: documentation, camera, servos, limits, polish
+- Incremental bring-up: documentation, Camera Module 3, local LAN view,
+  servos, limits, polish
